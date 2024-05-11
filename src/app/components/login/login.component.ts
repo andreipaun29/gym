@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', String(userId));
 
 
-      this.router.navigate(['home']);
+      this.router.navigate(['voting']);
 
 
     } else {
