@@ -1,1 +1,2 @@
-<p>voting works!</p>
+<button *ngIf="!connected" (click)="connectToMetamask()">Connect</button>
+<button disabled *ngIf="connected">Connected!</button>
