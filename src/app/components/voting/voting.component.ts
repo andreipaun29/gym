@@ -25,6 +25,10 @@ export class VotingComponent implements OnInit{
 
   constructor(private equipmentService: EquipmentService) {
     this.equipments = this.equipmentService.getEquipments();
+    this.equipments.forEach(equipment => {      
+      this.canVote = equipment.canVote;
+    });
+
    }
 
 
@@ -32,6 +36,7 @@ export class VotingComponent implements OnInit{
 
   connected: any;
   account: any;
+  canVote: any;
   async ngOnInit(): Promise<void> {
     const web3 = new Web3();
     // Set the provider you want from Web3.providers

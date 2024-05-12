@@ -5,7 +5,8 @@
       <p class="card-text">{{ equipment.description }}</p>
       <div style="display: flex; align-items:center; gap:20px">
         <div style="display: flex; flex-direction:row; justify-content:space-around; align-items:center; gap:20px">
-          <button [disabled]="!connected" class="btn btn-primary">Vote</button>
+          <button *ngIf="canVote" id="btn" [disabled]="!connected" class="btn btn-primary">Vote</button>
+          <button [disabled]="true" *ngIf="!canVote" type="button" class="btn btn-primary btn-sm">Voting Disabled</button>
           <p class="card-text">Votes: {{ equipment.votes }}</p>
         </div>
       </div>

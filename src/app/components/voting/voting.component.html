@@ -31,7 +31,7 @@
 
         <div id="equipmentContainer">
             <div *ngFor="let equipment of equipments">
-                <app-equipment [equipment]="equipment" [connected]="connected"></app-equipment>
+                <app-equipment [equipment]="equipment" [connected]="connected" [canVote]="canVote"></app-equipment>
             </div>
         </div>
     </div>
