@@ -1,0 +1,13 @@
+<div class="card">
+    <img class="card-img-top equipment-image" src="{{ equipment.image }}" alt="img">
+    <div class="card-body">
+      <h5 class="card-title">{{ equipment.name }}</h5>
+      <p class="card-text">{{ equipment.description }}</p>
+      <div style="display: flex; align-items:center; gap:20px">
+        <div style="display: flex; flex-direction:row; justify-content:space-around; align-items:center; gap:20px">
+          <button [disabled]="!connected" class="btn btn-primary">Vote</button>
+          <p class="card-text">Votes: {{ equipment.votes }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

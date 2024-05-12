@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import Web3 from 'web3';
+import { Equipment } from '../../models/equipment';
+import { EquipmentService } from '../../services/equipment.service';
+import { EquipmentComponent } from '../equipment/equipment.component';
 
 declare global {
   interface Window {
@@ -12,16 +15,23 @@ declare global {
 @Component({
   selector: 'app-voting',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EquipmentComponent],
   templateUrl: './voting.component.html',
   styleUrl: './voting.component.scss'
 })
 export class VotingComponent implements OnInit{
 
-  
+  equipments: Equipment[];
+
+  constructor(private equipmentService: EquipmentService) {
+    this.equipments = this.equipmentService.getEquipments();
+   }
+
+
+
+
   connected: any;
   account: any;
-  constructor() { }
   async ngOnInit(): Promise<void> {
     const web3 = new Web3();
     // Set the provider you want from Web3.providers
@@ -43,7 +53,9 @@ export class VotingComponent implements OnInit{
   
   connectToMetamask(){
     window.ethereum.request({ method: 'eth_requestAccounts' });
-    this.connected = true;
+    setTimeout(() => {
+      this.connected = true;
+    }, 5000);
     const web3 = new Web3();
     web3.setProvider(window.ethereum);  
 

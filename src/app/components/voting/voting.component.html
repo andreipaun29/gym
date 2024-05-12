@@ -1,2 +1,39 @@
-<button *ngIf="!connected" (click)="connectToMetamask()">Connect</button>
-<button disabled *ngIf="connected">Connected!</button>
+<div id="page">
+    <div style="padding-left: 2vw;" *ngIf="!connected" class="alert alert-dismissible alert-danger">
+        <strong>Metamask is not connected!</strong> &nbsp; <b class="alert-link">Connect to Metamask to begin voting</b>
+    </div>
+    
+    <div style="padding-left: 2vw;" *ngIf="connected" class="alert alert-dismissible alert-success">
+        <strong>Connection succesful!</strong> &nbsp; <b class="alert-link">You can now begin voting</b>.
+    </div>
+    
+    
+    
+    
+    <div style="display:flex; justify-content:center; align-items:center; padding-top:2vh">
+        <h5>Click the button to connect to Metamask &nbsp;</h5>
+        
+        <button  *ngIf="!connected" (click)="connectToMetamask()" type="button" class="btn btn-outline-danger">Not Connected</button>
+        <button  disabled *ngIf="connected" type="button" class="btn btn-success">Connected</button>
+        <img src="assets/metamask.png" alt="metamask" width="60" height="60">
+        
+    </div>
+
+
+
+
+    <div style="margin-left: 10vw;" id="voteSection">
+        <div style="background: #454545;
+                    width:29.7vw; 
+                    height:4vh;
+                    border-radius: 20px 20px 0px 0px;"><h3>Vote your favorite gym equipment</h3></div>
+        
+
+        <div id="equipmentContainer">
+            <div *ngFor="let equipment of equipments">
+                <app-equipment [equipment]="equipment" [connected]="connected"></app-equipment>
+            </div>
+        </div>
+    </div>
+
+</div>
