@@ -21,7 +21,13 @@ export class LoginComponent implements OnInit {
 
 
    ngOnInit(): void {    
-        localStorage.clear();
+        localStorage.removeItem('lastName');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+        localStorage.removeItem('location');
+        localStorage.removeItem('token');
    }
 
 
