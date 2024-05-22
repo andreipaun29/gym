@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import { Equipment } from '../../models/equipment';
 import { EquipmentService } from '../../services/equipment.service';
 import { EquipmentComponent } from '../equipment/equipment.component';
+import { ContractService } from '../../services/contract.service';
 
 declare global {
   interface Window {
@@ -21,22 +22,21 @@ declare global {
 })
 export class VotingComponent implements OnInit{
 
-  equipments: Equipment[];
+  // equipments: any[];
 
-  constructor(private equipmentService: EquipmentService) {
-    this.equipments = this.equipmentService.getEquipments();
-    this.equipments.forEach(equipment => {      
-      this.canVote = equipment.canVote;
-    });
-
-   }
+  constructor(private equipmentService: EquipmentService, private contractService: ContractService) {
+    // this.equipments = this.getEquipments();
+    // this.equipments.forEach(equipment => {      
+      // this.state = equipment.state;
+    // });
+  }
 
 
 
 
   connected: any;
   account: any;
-  canVote: any;
+  state: any;
   async ngOnInit(): Promise<void> {
     const web3 = new Web3();
     // Set the provider you want from Web3.providers
@@ -53,6 +53,14 @@ export class VotingComponent implements OnInit{
       this.connected = true;
     }
 
+    // console.log(await this.contractService.contract.methods.addMachine('Ultra Big Press2').send({from: this.account}));
+
+    let tempMachines = await this.contractService.contract.methods.getMostUsedMachine().call();
+    console.log(tempMachines);
+    
+    
+
+    
 
   }
   
@@ -69,8 +77,8 @@ export class VotingComponent implements OnInit{
     
   }
 
+  getEquipments(): any[] {
+    return this.equipmentService.getEquipments(this.account);
+  }
 
-  
-
-  
 }

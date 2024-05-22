@@ -1,72 +1,60 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable, Output, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Equipment } from '../models/equipment';
+import { ContractService } from './contract.service';
+import Web3 from 'web3';
+import { VotingComponent } from '../components/voting/voting.component';
 @Injectable({
   providedIn: 'root'
 })
 
-export class EquipmentService {
-    private equipments: Equipment[] | any = [
-        {
-            id:1,
-            name: 'Bench Press',
-            description: 'A bench press is a key piece of equipment in any gym',
-            image: '../../assets/bench_press.png',
-            votes: 6,
-            canVote: true,
-        },
+export class EquipmentService implements OnInit {
 
-        {
-            id:2,
-            name: 'Chest Press',
-            description: 'A chest press is a key piece of equipment in any gym',
-            image: '../../assets/chest_press.png',
-            votes: 5,
-            canVote: true,
-        },
+    constructor(private contractService: ContractService) {}
+    
 
-        {
-            id:3,
-            name: 'Leg Press',
-            description: 'A leg press is a key piece of equipment in any gym',
-            image: '../../assets/leg_press.png',
-            votes: 0,
-            canVote: true,
-        },
 
-        {
-            id:4,
-            name: 'Pull Up Bar',
-            description: 'A pull up bar is a key piece of equipment in any gym',
-            image: '../../assets/pull_up_bar.png',
-            votes: 3,
-            canVote: true,
-        },
+    private equipments: Equipment[] | any = [];
 
-        {
-            id:5,
-            name: 'Rowing Machine',
-            description: 'A rowing machine is a key piece of equipment in any gym',
-            image: '../../assets/rowing_machine.png',
-            votes: 2,
-            canVote: true,
-        },
 
-        {
-            id:6,
-            name: 'Lat Pulldown Machine',
-            description: 'A lat pull down machine is a key piece of equipment in any gym',
-            image: '../../assets/lat_pulldown_machine.png',
-            votes: 1,
-            canVote: true,
+    account: any;
+
+
+
+    async ngOnInit(): Promise<void> {
+        
+        
+        // console.log(this.getEquipments());
+        
+        
+        const web3 = new Web3();
+        // Set the provider you want from Web3.providers
+        web3.setProvider(window.ethereum);
+    
+        try {
+          const accounts = await web3.eth.getAccounts();
+          this.account = accounts[0];
+          console.log(this.account);
+        } catch (error) {
+          console.error('Error getting accounts:', error);
         }
 
-        
-    ];
+        console.log(this.account);
+    
+      }
+    
 
-    constructor() {}
+    
+    
+    
+    getEquipments(account: any): Equipment[] | any {
+        setTimeout(() => {
+            console.log(account);
+            
+            
+            this.equipments =  this.contractService.contract.methods['getAllMachines']().send({from: account});
+        }, 5000);
 
-    getEquipments(): Equipment[] | any {
         return this.equipments;
     }
 }
