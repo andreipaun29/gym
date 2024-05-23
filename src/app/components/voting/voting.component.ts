@@ -68,17 +68,18 @@ export class VotingComponent implements OnInit{
     window.ethereum.request({ method: 'eth_requestAccounts' });
     setTimeout(() => {
       this.connected = true;
-    }, 5000);
+      window.location.reload();
+    }, 7000);
     const web3 = new Web3();
     web3.setProvider(window.ethereum);  
 
-    web3.eth.getAccounts().then(console.log); 
+    web3.eth.getAccounts().then(accounts => {
+      console.log(accounts);
+      console.log('reload');
+      
+    });
     
     
-  }
-
-  getEquipments(): any[] {
-    return this.equipmentService.getEquipments(this.account);
   }
 
 }

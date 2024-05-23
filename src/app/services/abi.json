@@ -2,18 +2,11 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "votingDuration",
+				"type": "uint256"
 			}
 		],
-		"name": "addMachine",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -50,21 +43,72 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "voter",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "machine",
+				"type": "string"
+			}
+		],
+		"name": "Voted",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "machineName",
+				"name": "name",
 				"type": "string"
-			},
-			{
-				"internalType": "enum GymMachineManager.MachineState",
-				"name": "state",
-				"type": "uint8"
 			}
 		],
-		"name": "updateMachineState",
+		"name": "addMachine",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "voteCount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalVotes",
+				"type": "uint256"
+			}
+		],
+		"name": "calculatePercentage",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "percentage",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "endVoting",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -92,6 +136,19 @@
 				"internalType": "struct GymMachineManager.GymMachine[]",
 				"name": "allMachines",
 				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMostUsedMachine",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "mostUsedMachine",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -153,6 +210,68 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "setEndVoting",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "machineName",
+				"type": "string"
+			},
+			{
+				"internalType": "enum GymMachineManager.MachineState",
+				"name": "state",
+				"type": "uint8"
+			}
+		],
+		"name": "updateMachineState",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "machineName",
+				"type": "string"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "voters",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "hasVoted",
+				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "votedMachine",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",

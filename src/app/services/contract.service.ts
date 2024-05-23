@@ -11,26 +11,13 @@ export class ContractService {
 
     constructor () {}
 
-    contractAddress = '0xef714F40d90754CEA97271fAB691C2FF65E663bE';
+    contractAddress = '0xc94A0158fF26b03F05F09a4c3D3C39FBaf386E74';
 
     //web3
     web3 = new Web3(window.ethereum);
     
 
     abi = [
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          }
-        ],
-        "name": "addMachine",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
       {
         "inputs": [
           {
@@ -75,44 +62,6 @@ export class ContractService {
         "type": "event"
       },
       {
-        "inputs": [],
-        "name": "setEndVoting",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "machineName",
-            "type": "string"
-          },
-          {
-            "internalType": "enum GymMachineManager.MachineState",
-            "name": "state",
-            "type": "uint8"
-          }
-        ],
-        "name": "updateMachineState",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "machineName",
-            "type": "string"
-          }
-        ],
-        "name": "vote",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
         "anonymous": false,
         "inputs": [
           {
@@ -130,6 +79,19 @@ export class ContractService {
         ],
         "name": "Voted",
         "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "name": "addMachine",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
       },
       {
         "inputs": [
@@ -270,6 +232,44 @@ export class ContractService {
           }
         ],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "setEndVoting",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "machineName",
+            "type": "string"
+          },
+          {
+            "internalType": "enum GymMachineManager.MachineState",
+            "name": "state",
+            "type": "uint8"
+          }
+        ],
+        "name": "updateMachineState",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "machineName",
+            "type": "string"
+          }
+        ],
+        "name": "vote",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
       },
       {
