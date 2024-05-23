@@ -1,0 +1,30 @@
+#page{
+    flex-direction: column;
+    height: 118vh;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../../../assets/fundal_vote.png');
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+
+  color: #f2f2f2;
+
+}
+
+
+h5{
+    margin: 0;
+    color: #f2f2f2;
+}
+
+
+h3{
+    margin-top: 4vh;
+    padding-left: 7px;
+    color: #f2f2f2;
+}
+
+table{
+    background-color: rgb(167, 167, 167);
+}

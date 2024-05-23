@@ -1,0 +1,82 @@
+<div id="page">
+
+    <div style="padding-left: 2vw; display:flex" *ngIf="!connected" class="alert alert-dismissible alert-danger">
+        <strong>Metamask is not connected!</strong> &nbsp; <b class="alert-link">Connect to Metamask to begin voting</b>
+        <button (click)="logout()" style="margin-left: 50vw; height:30px; display:flex; justify-content:center; align-items:center" class="btn btn-info">Login Page</button>
+    </div>
+    
+    <div style="padding-left: 2vw; display:flex" *ngIf="connected" class="alert alert-dismissible alert-success">
+        <strong>Connection succesful!</strong> &nbsp; <b class="alert-link">You can now begin voting as {{account}}</b>.
+        <button (click)="logout()" style="margin-left: 30vw; height:30px; display:flex; justify-content:center; align-items:center" class="btn btn-info">Login Page</button>
+    </div>
+    
+    
+    
+    
+    <div style="display:flex; justify-content:center; align-items:center; padding-top:2vh">
+        <h5>Click the button to connect to Metamask &nbsp;</h5>
+        
+        <button  *ngIf="!connected" (click)="connectToMetamask()" type="button" class="btn btn-outline-danger">Not Connected</button>
+        <button  disabled *ngIf="connected" type="button" class="btn btn-success">Connected</button>
+        <img src="assets/metamask.png" alt="metamask" width="60" height="60">
+        
+    </div>
+
+
+
+
+
+
+
+
+    <table *ngIf="connected" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="voteCount">
+          <th mat-header-cell *matHeaderCellDef> Vote Count </th>
+          <td mat-cell *matCellDef="let element"> {{element.voteCount}} Votes </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef> State </th>
+          <td mat-cell *matCellDef="let element"> 
+
+            <div style="display: flex; align-items:center">
+                <p style="margin-bottom: 0; margin-right:10px" *ngIf="element.state == 1">Voting is <b>ENABLED</b> for this equipment</p>
+                <button style="background: rgb(71, 15, 15); color:aliceblue" *ngIf="element.state == 1" (click)="lock(element.name)">
+                    Lock Machine
+                </button>  
+            </div>
+
+            <div style="display: flex; align-items:center">
+                <p style="margin-bottom: 0; margin-right:10px" *ngIf="element.state == 0">Voting is <b>DISABLED</b> for this equipment</p>
+                <button style="background: green; color:aliceblue" *ngIf="element.state == 0" (click)="unlock(element.name)">
+                    Unlock Machine
+                </button>
+            </div>
+
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+
+      <div style="display: flex; margin-top:25px; height:80px; background:gray">
+        <mat-form-field appearance="fill">
+          <mat-label>Equipment name</mat-label>
+          <input id="form" matInput placeholder="Name">
+        </mat-form-field>
+      
+        <button style="margin-left: 5vw; margin-top: 2px; height:50px" (click)="addEquipment()" class="btn btn-success">Add Equipment</button>
+      </div>
+      
+      
+      
+      
+</div>

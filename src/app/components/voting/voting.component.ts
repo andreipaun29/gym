@@ -55,6 +55,10 @@ export class VotingComponent implements OnInit{
       this.equipments = machines;
 
     });
+
+    if(localStorage.getItem('password') == 'admin'){
+      this.router.navigate(['/admin']);
+    }
     
   }
   
