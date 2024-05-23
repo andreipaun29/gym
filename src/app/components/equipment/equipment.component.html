@@ -1,14 +1,13 @@
 <div class="card">
-    <img class="card-img-top equipment-image" src="{{ equipment.image }}" alt="img">
+    <img class="card-img-top equipment-image" [src]=image alt="img">
     <div class="card-body">
       <h5 class="card-title">{{ equipment.name }}</h5>
-      <p class="card-text">{{ equipment.description }}</p>
+      <p class="card-text">{{ description }}</p>
       <div style="display: flex; align-items:center; gap:20px">
         <div style="display: flex; flex-direction:row; justify-content:space-around; align-items:center; gap:20px">
-          <button (click)="vote()" *ngIf="canVote && !alreadyVoted" id="btn" [disabled]="!connected" class="btn btn-primary">Vote</button>
-          <button [disabled]="true" *ngIf="!canVote" type="button" class="btn btn-primary btn-sm">Voting Disabled</button>
-          <button [disabled]="true" *ngIf="alreadyVoted" type="button" class="btn btn-primary btn-sm">Already Voted</button>
-          <p class="card-text">Votes: {{ equipment.votes }}</p>
+          <button (click)="vote()" *ngIf="equipment[2]" id="btn" [disabled]="!connected" class="btn btn-primary">Vote</button>
+          <button [disabled]="true" *ngIf="!equipment[2]" type="button" class="btn btn-primary btn-sm">Voting Locked</button>
+          <p class="card-text">Votes: {{ equipment[1] }}</p>
         </div>
       </div>
     </div>

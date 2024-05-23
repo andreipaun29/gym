@@ -1,10 +1,12 @@
 <div id="page">
-    <div style="padding-left: 2vw;" *ngIf="!connected" class="alert alert-dismissible alert-danger">
+    <div style="padding-left: 2vw; display:flex" *ngIf="!connected" class="alert alert-dismissible alert-danger">
         <strong>Metamask is not connected!</strong> &nbsp; <b class="alert-link">Connect to Metamask to begin voting</b>
+        <button (click)="logout()" style="margin-left: 50vw; height:30px; display:flex; justify-content:center; align-items:center" class="btn btn-info">Login Page</button>
     </div>
     
-    <div style="padding-left: 2vw;" *ngIf="connected" class="alert alert-dismissible alert-success">
+    <div style="padding-left: 2vw; display:flex" *ngIf="connected" class="alert alert-dismissible alert-success">
         <strong>Connection succesful!</strong> &nbsp; <b class="alert-link">You can now begin voting as {{account}}</b>.
+        <button (click)="logout()" style="margin-left: 30vw; height:30px; display:flex; justify-content:center; align-items:center" class="btn btn-info">Login Page</button>
     </div>
     
     
@@ -24,15 +26,15 @@
 
     <div style="margin-left: 10vw;" id="voteSection">
         <div style="background: #454545;
-                    width:29.7vw; 
+                    width:36vw; 
                     height:4vh;
                     border-radius: 20px 20px 0px 0px;"><h3>Vote your favorite gym equipment</h3></div>
         
 
         <div id="equipmentContainer">
-            <!-- <div *ngFor="let equipment of equipments">
-                <app-equipment [equipment]="equipment" [connected]="connected" [canVote]="canVote"></app-equipment>
-            </div> -->
+            <div *ngFor="let equipment of equipments">
+                <app-equipment [equipment]="equipment" [connected]="connected" [state]="state" [account]="account"></app-equipment>
+            </div> 
         </div>
     </div>
 

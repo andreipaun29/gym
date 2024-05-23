@@ -56,18 +56,11 @@ private userPasswordSource = new BehaviorSubject<string | null>(null);
         },
         {
           id: 2,
-          firstName: 'Jane',
-          lastName: 'Doe',
-          email: 'janedoe@gmail.com',
-          password: '654321',
+          firstName: 'admin',
+          lastName: 'admin',
+          email: 'admin',
+          password: 'admin',
         },
-        {
-          id: 3,
-          firstName: 'John',
-          lastName: 'Smith',
-          email: 'johnsmith@gmail.com',
-          password: '121212',
-        }
       ];
   constructor() { 
     

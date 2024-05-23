@@ -6,6 +6,7 @@ import { Equipment } from '../../models/equipment';
 import { EquipmentService } from '../../services/equipment.service';
 import { EquipmentComponent } from '../equipment/equipment.component';
 import { ContractService } from '../../services/contract.service';
+import { Router } from '@angular/router';
 
 declare global {
   interface Window {
@@ -22,13 +23,10 @@ declare global {
 })
 export class VotingComponent implements OnInit{
 
-  // equipments: any[];
+  equipments: any[] = [];
 
-  constructor(private equipmentService: EquipmentService, private contractService: ContractService) {
-    // this.equipments = this.getEquipments();
-    // this.equipments.forEach(equipment => {      
-      // this.state = equipment.state;
-    // });
+  constructor(private equipmentService: EquipmentService, private contractService: ContractService, private router:Router) {
+
   }
 
 
@@ -53,15 +51,11 @@ export class VotingComponent implements OnInit{
       this.connected = true;
     }
 
-    // console.log(await this.contractService.contract.methods.addMachine('Ultra Big Press2').send({from: this.account}));
+    await this.contractService.contract.methods.getAllMachines().call().then((machines: any) => {
+      this.equipments = machines;
 
-    let tempMachines = await this.contractService.contract.methods.getMostUsedMachine().call();
-    console.log(tempMachines);
+    });
     
-    
-
-    
-
   }
   
   connectToMetamask(){
@@ -81,5 +75,17 @@ export class VotingComponent implements OnInit{
     
     
   }
+
+
+  logout(){
+    //use web3 to disconnect from metamask
+    if(this.account){
+      alert('Disconnect from metamask first!');
+    }
+    else{    
+    this.router.navigate(['/']);
+    localStorage.clear();
+  }
+}
 
 }
