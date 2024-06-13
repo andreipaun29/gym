@@ -23,10 +23,18 @@ export class EquipmentComponent implements AfterViewInit{
   image: string = '';
   description: string = '';
 
+  alreadyVoted: boolean = false;
 
-  constructor(private dialog: MatDialog, private contractService: ContractService, private cdr: ChangeDetectorRef) {}
+  constructor(private dialog: MatDialog, private contractService: ContractService, private cdr: ChangeDetectorRef) {
+  }
 
   ngAfterViewInit(): void {
+
+    if(localStorage.getItem('voted') == 'true'){
+      this.alreadyVoted = true;
+    }
+
+
     this.equipment[1] = Number(this.equipment[1]);
     this.equipment[2] = Number(this.equipment[2]);
 
@@ -91,8 +99,19 @@ export class EquipmentComponent implements AfterViewInit{
 
     console.log(this.equipment[0]);
 
+    
+    localStorage.setItem('votedEquipment', this.equipment[0]);
+    this.alreadyVoted = true;
+    localStorage.setItem('voted', 'true');
+    localStorage.setItem('votes', this.equipment.votes);
+
     await this.contractService.contract.methods.vote(this.equipment[0]).send({from: this.account}).then((res: any) => {
       console.log(res);
+      this.openDialog();
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+
     }
     ).catch((err: any) => {
       console.log(err);
